@@ -160,7 +160,7 @@ Note: Please cd in to client source dir (`cd client/src`) dir for accessing CLI.
 
   
 ### email<br>
-    bug-report@w-p.com
+    diganth [at] gmail [dot] com
    
 ## Development notes
 ### Please refer CONTRIBUTING.md
