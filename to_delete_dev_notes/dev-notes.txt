@@ -1,0 +1,120 @@
+# This should not be part of repository. However, I wanted to share how I organize things.
+
+# This is not a documentation, just scribble when something crosses my mind. 
+
+# all the notes are in individual .py files, as part of initial brain storming.
+
+# quick cmds:
+--------------
+source /Users/diganth/Documents/projects/woven-planet/wp-venv/wp-venv/bin/activate
+
+# proj root dir: 
+cd /Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge
+
+# tests
+python -m unittest tests/test.py
+python -m unittest tests.test
+python -m unittest discover
+
+# coverage
+coverage run -m unittest tests/test.py 
+coverage report -m
+
+# refs
+------------
+packaging: https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/
+
+# notes:
+------------
+use strategy pattern to plugin/plugout algos
+
+# driver level testing args
+python driver.py --filename /Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge/src/uploaded_files/lions_share_novel.txt_08_31_2022_12_48_31_encrypted.txt --operation decrypt --algo AES
+
+# curl commands for API tests.
+curl -X POST -F operation=encrypt -F file=@"/Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge/LISENCE.txt" http://127.0.0.1:5000/fileupload
+curl -X POST -F operation=decrypt -F file=@"/Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge/src/uploaded_files/lions_encrypted.enc" http://127.0.0.1:5000/fileupload
+
+curl -X GET http://localhost:5000/taskstatus -F task_id="3c90f5b5-ae16-4e86-94d9-1a18b2c9030a"
+
+curl -X GET http://localhost:5000/filedownload -F task_id="65a27296-f9ee-4444-8a7c-4a8a8efe8951"
+
+
+curl -X GET http://localhost:5000/hash -F password="test@123"
+
+
+
+#start redis, default config. This can be fine tuned, but later.
+redis-server
+
+#start workers 
+celery -A celeryapp.celery  worker --loglevel=info
+
+
+#cli commands
+---------------
+
+python cryptoapi.py --password-hash hi
+python cryptoapi.py --encrypt /Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge/LICENSE.txt
+python cryptoapi.py --decrypt /Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge/LICENSE.txt.enc
+
+# distribution
+python setup.py bdist_wheel
+
+# mistakes
+------------
+created a file called logging and all the packages started throwing error getLogger not found, realised it after an hour of debugging! Thanks pdb!
+
+# TODO
+------------
+double check:
+    add docstrings to all interface funcs
+    variable names, class names, module names.
+    look for places to add try/except blocks.
+    add right logs (info, debug, err, critical)
+use git issues template for helping problem reproduction
+use 'wheel' to distribute
+skim the log files generated for sensitive data
+
+
+# Corner cases:
+---------------------
+1. if same is uploaded via automated scripts, we would be redoing same thing.
+    can we check for md5sum, store md5sum in a dict, if matches return the file.
+2. Space growing up after a month or so.
+    auto-zip or auto-clean 
+3. if a binary file is uploaded to be encrypted, with .txt extension. 
+    read file header and detect if it is text file.
+
+
+# Scalability: Handle 100k clients?
+    # distriibuted approach, scale out when load increases? 
+    # common database? or distributed? (hmm.. now its getting complicated ;) )
+
+# security: 
+# Should we allow any client or should we build 'trusted' list of clients, that way we drive away unwanted access.
+
+
+# maintainability:
+    # example: add new encryption algo(s) 
+
+#---- 
+Plan
+#-----
+Day 1 : 2 hours, brain storming, figuring out features, just getting outline, server design
+Day 2 : 6 hours slogging on holiday. Converted stand alone server to Server with worker processes using celery.
+        Server func is almost done, with some basic UTs. Added hashing fucntionality
+Day 3 : 3 hours, fiddling with curl commands to test out. Basic  client is done. 
+Day 4 : 2 hours Fit in git hub actions and some testing, never worked before, its impressive!, 
+Day 5 : 4 PEP8 static code check. Fixing githhubActions, first version of README.md
+Day 6 : 3 PLAN - CLI edge cases test. CONTRIBUTING.md. Distributing method. Bug reproducibility
+        try-catch blocks
+        logging
+        docstrings
+Day 7:  PLAN - follow README and make sure it is workings as it claims
+
+TODO:
+Day 8: Need to plan for distributing, release
+
+Bandit, security check. #TODO.
+https://github.com/marketplace/actions/python-security-check-using-bandit

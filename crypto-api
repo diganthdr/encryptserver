@@ -1,0 +1,11 @@
+#!/bin/bash    
+
+PWD=`pwd`
+cd client/src
+if [ $# -eq 0 ]; then
+    python3 cryptoapi.py --help
+    exit 1
+fi
+
+python3 cryptoapi.py $*
+cd $PWD
