@@ -1,4 +1,3 @@
-[![crypto-server pipeline](https://github.com/woven-planet-security-hiring/diganthdr-dast-challenge/actions/workflows/python-app.yml/badge.svg)](https://github.com/woven-planet-security-hiring/diganthdr-dast-challenge/actions/workflows/python-app.yml)
 
 # Crypto server
 
@@ -13,7 +12,7 @@ A CLI provides interface to access services
 
 ### Limitations, constraints
 - Currently only text files are supported for encryption.
-  Note that, text files with extention '.txt' are supported. Autodetection based on MIME types will be supported in https://github.com/woven-planet-security-hiring/diganthdr-dast-challenge/issues/30
+  Note that, text files with extention '.txt' are supported. Autodetection based on MIME types will be supported later.
 - Maximum size of text file is 10MB for encryption.
 - Max length of password for hashing supported is 20 chars.<br>
   (_Decision is based on an article which indicates an average password length is about 9.6 chars long https://resources.infosecinstitute.com/topic/beyond-password-length-complexity/_)
@@ -21,7 +20,7 @@ A CLI provides interface to access services
 ## Design
 
 ### Server design
-![alt text](https://github.com/woven-planet-security-hiring/diganthdr-dast-challenge/blob/main/crypto%20server%20design.001.jpeg)
+![alt text](https://github.com/diganthdr/encryptserver/blob/main/crypto-server-architecture.001.jpeg)
 
 #### Design choices
 1. Single process server
@@ -38,7 +37,7 @@ So, three processes make up a a complete working server.
 
 
 ### CLI Client design
-![alt text](https://github.com/woven-planet-security-hiring/diganthdr-dast-challenge/blob/main/cli-server%20enc-dec%20workflow.001.jpeg)
+![alt text](https://github.com/diganthdr/encryptserver/blob/main/cli-server%20enc-dec%20workflow.001.jpeg)
 
 CLI is wrapper around REST APIs exposed by server. It sends request for encryption/decryption to the server and waits (maximum 10 seconds) for response. 
 However, for password hashing, it's immediate. As constraint for password is maximum 20 chars. Which should be processed quickly.
@@ -64,22 +63,19 @@ Most of the errors/constraints are handled at server. However, it makes sense to
  
 #### Installing source code 
 - Download source code <br>
-    `git clone https://github.com/woven-planet-security-hiring/diganthdr-dast-challenge.git`
+    `git clone https://github.com/diganthdr/encryptserver.git`
     
-#### Wheel installation (via .whl) _(Yet to be implemented)_ (See: https://github.com/woven-planet-security-hiring/diganthdr-dast-challenge/issues/20)
-~~- Download <release>.whl~~
-~~- pip install crypt.whl~~
   
 ### Bring up server
-  cd into code root dir `cd diganthdr-dast-challenge`<br>
+  cd into code root dir `cd encryptserver`<br>
   1. run setup.sh which sets up libraries in virtual env and
   `source setup.sh`<br>
   2. run deploy.sh which spins up a server on port 5000 _(you can change if you want to see CONTRIBUTING.md)_
   
-  One-liner : `cd diganthdr-dast-challenge && source setup.sh && source deploy.sh` 
+  One-liner : `cd encryptserver && source setup.sh && source deploy.sh` 
   
   If server is already running, you can clean-up process before bringing it up using shutdown-server.sh script. <br>
-  One-liner: `cd diganthdr-dast-challenge && source shutdown-server.sh && source setup.sh && source deploy.sh`
+  One-liner: `cd encryptserver && source shutdown-server.sh && source setup.sh && source deploy.sh`
   
   Note: logs of these processes are are stored in root dir of code `ls --lrt` and look for `.log` files. They have obvious filenames.
   
@@ -131,7 +127,7 @@ Note: Please cd in to client source dir (`cd client/src`) dir for accessing CLI.
     - Server unreachable 
     
     Example:<br>
-    `./crypto-api --encrypt /home/projects/woven-planet/diganthdr-dast-challenge/LICENSE.txt` <br>
+    `./crypto-api --encrypt /home/projects/encryptserver/LICENSE.txt` <br>
     A file named `LICENSE.txt.encrypt` gets saved in current working dir
     
 - **Decryption**<br>
@@ -140,7 +136,7 @@ Note: Please cd in to client source dir (`cd client/src`) dir for accessing CLI.
     Output: decrypted file in current dir, with `.decrypt` suffix added.
     
     Example:<br>
-    `./crypto-api --decrypt /home/projects/woven-planet/diganthdr-dast-challenge/LICENSE.txt.encrypt` <br>
+    `./crypto-api --decrypt /home/projects/encryptserver/LICENSE.txt.encrypt` <br>
     
     A file named `LICENSE.txt.encrypt.decrypt` gets saved in current working dir
     
@@ -171,4 +167,6 @@ Note: Please cd in to client source dir (`cd client/src`) dir for accessing CLI.
     https://github.com/diganthdr/encryptserver/blob/main/CONTRIBUTING.md 
 
 ## License
-   MIT 
+   MIT
+   
+Note: This project was originally done as part of coding hackathon excercise. Feel free to contribute.
