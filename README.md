@@ -168,8 +168,7 @@ Note: Please cd in to client source dir (`cd client/src`) dir for accessing CLI.
    
 ## Development notes
 ### Please refer CONTRIBUTING.md
-   _ https://github.com/woven-planet-security-hiring/diganthdr-dast-challenge/blob/main/CONTRIBUTING.md_
-
+    https://github.com/diganthdr/encryptserver/blob/main/CONTRIBUTING.md 
 
 ## License
    MIT 
