@@ -2,7 +2,7 @@
 
 ## Download code
 clone repository
-`git clone https://github.com/woven-planet-security-hiring/diganthdr-dast-challenge.git`
+`git clone https://github.com/diganthdr/encryptserver.git`
 
 since we are following trunk based development, feel free to make changes in 'main' branch.
 
@@ -16,7 +16,7 @@ since we are following trunk based development, feel free to make changes in 'ma
 3. Create virtual env
   `python3 -m venv <env-name>` example, `python3 -venv wp-venv`
 4. Activate virtual env
-   `source <path_to_activate_script>`. Example `source /documents/projects/woven-planet/wp-venv/wp-venv/bin/activate`
+   `source <path_to_activate_script>`. Example `source /documents/projects/venv/bin/activate`
 5. Install required libraries
   `pip install requirements.txt`
 
@@ -38,7 +38,7 @@ Refer README.md for one-liners to setup and bring up server.
  
  ## Architecture/Design
   
-   ![alt text](https://github.com/woven-planet-security-hiring/diganthdr-dast-challenge/blob/main/crypto-server-architecture.001.jpeg)
+   ![alt text](https://github.com/diganthdr/encryptserver/blob/main/crypto-server-architecture.001.jpeg)
   
  ## Code dir structure.
  
