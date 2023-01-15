@@ -6,10 +6,10 @@
 
 # quick cmds:
 --------------
-source /Users/diganth/Documents/projects/woven-planet/wp-venv/wp-venv/bin/activate
+source /Users/diganth/Documents/projects/encryptserver/bin/activate
 
 # proj root dir: 
-cd /Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge
+cd /Users/diganth/Documents/projects/encryptserver
 
 # tests
 python -m unittest tests/test.py
@@ -29,11 +29,11 @@ packaging: https://packaging.python.org/en/latest/guides/distributing-packages-u
 use strategy pattern to plugin/plugout algos
 
 # driver level testing args
-python driver.py --filename /Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge/src/uploaded_files/lions_share_novel.txt_08_31_2022_12_48_31_encrypted.txt --operation decrypt --algo AES
+python driver.py --filename /Users/diganth/Documents/projects/encryptserver/src/uploaded_files/lions_share_novel.txt_08_31_2022_12_48_31_encrypted.txt --operation decrypt --algo AES
 
 # curl commands for API tests.
-curl -X POST -F operation=encrypt -F file=@"/Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge/LISENCE.txt" http://127.0.0.1:5000/fileupload
-curl -X POST -F operation=decrypt -F file=@"/Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge/src/uploaded_files/lions_encrypted.enc" http://127.0.0.1:5000/fileupload
+curl -X POST -F operation=encrypt -F file=@"/Users/diganth/Documents/projects/encryptserver/LISENCE.txt" http://127.0.0.1:5000/fileupload
+curl -X POST -F operation=decrypt -F file=@"/Users/diganth/Documents/projects/encryptserver/src/uploaded_files/lions_encrypted.enc" http://127.0.0.1:5000/fileupload
 
 curl -X GET http://localhost:5000/taskstatus -F task_id="3c90f5b5-ae16-4e86-94d9-1a18b2c9030a"
 
@@ -55,8 +55,8 @@ celery -A celeryapp.celery  worker --loglevel=info
 ---------------
 
 python cryptoapi.py --password-hash hi
-python cryptoapi.py --encrypt /Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge/LICENSE.txt
-python cryptoapi.py --decrypt /Users/diganth/Documents/projects/woven-planet/diganthdr-dast-challenge/LICENSE.txt.enc
+python cryptoapi.py --encrypt /Users/diganth/Documents/projects/encryptserver/LICENSE.txt
+python cryptoapi.py --decrypt /Users/diganth/Documents/projects/encryptserver/LICENSE.txt.enc
 
 # distribution
 python setup.py bdist_wheel
